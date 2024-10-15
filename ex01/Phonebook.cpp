@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:42:33 by atamas            #+#    #+#             */
-/*   Updated: 2024/10/15 10:39:07 by atamas           ###   ########.fr       */
+/*   Updated: 2024/10/15 10:42:02 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	add_to_contact_array(PhoneBook &book, Contact &new_contact)
 	Contact	temp;
 	int		i;
 
-	if (book.size < 7)
+	if (book.size < 8)
 		i = book.size;
 	else
 		i = 7;
