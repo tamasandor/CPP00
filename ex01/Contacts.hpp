@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:56:29 by atamas            #+#    #+#             */
-/*   Updated: 2024/10/14 14:14:41 by atamas           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:33:33 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ class Contact
 		void setNickname(const std::string &nickname);
 		void setPhoneNumber(const std::string &phone_number);
 		void setDarkestSecret(const std::string &darkest_secret);
+		void printFormatted();
+		void printModified(std::string &str);
 };
 
 #endif

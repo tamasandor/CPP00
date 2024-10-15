@@ -6,16 +6,38 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:03:53 by atamas            #+#    #+#             */
-/*   Updated: 2024/10/11 15:54:46 by atamas           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:33:25 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contacts.hpp"
+#include <iomanip>
 
 Contact::Contact(void) {
 }
 
 Contact::~Contact() {
+}
+
+void Contact::printModified(std::string &str)
+{
+	if (str.length() > 10)
+		std::cout << str.substr(0, 9) << '.';
+	else
+		std::cout << std::setw(10) << str;
+}
+
+void Contact::printFormatted()
+{
+	std::cout << '|';
+	std::cout << std::setw(10) << index;
+	std::cout << '|';
+	printModified(m_firstname);
+	std::cout << '|';
+	printModified(m_lastname);
+	std::cout << '|';
+	printModified(m_nickname);
+	std::cout << '|' << '\n';
 }
 
 std::string Contact::getFirstName() const {

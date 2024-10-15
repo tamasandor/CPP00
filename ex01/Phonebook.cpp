@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:42:33 by atamas            #+#    #+#             */
-/*   Updated: 2024/10/15 10:42:02 by atamas           ###   ########.fr       */
+/*   Updated: 2024/10/15 22:20:48 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <iomanip>
 #include <cctype>
 #include <stdlib.h>
-
 #include "Phonebook.hpp"
 
 PhoneBook::PhoneBook(void)
@@ -49,7 +48,56 @@ bool	isOnlyNumbers(const	std::string &str)
 	return (true);
 }
 
-void	add_to_contact_array(PhoneBook &book, Contact &new_contact)
+void	displayContactInfo(PhoneBook &book, int index)
+{
+	if (index > book.size)
+	{
+		std::cout << "Contact doesn't exist\n";
+		return ;
+	}
+	std::cout << "First name: " << book.contacts[index - 1].getFirstName() << '\n';
+	std::cout << "Last name: " << book.contacts[index - 1].getLastName() << '\n';
+	std::cout << "Nick name: " << book.contacts[index - 1].getNickname() << '\n';
+	std::cout <<  "Phone number: "<< book.contacts[index - 1].getPhoneNumber() << '\n';
+	std::cout <<  "Darkest secret: "<< book.contacts[index - 1].getDarkestSecret() << '\n';
+}
+
+void	searchForContact(PhoneBook &book)
+{
+	std::string	temp;
+	int			integer;
+
+	if (book.size == 0)
+	{
+		std::cout << "Contact list is empty!\n";
+		return ;
+	}
+	std::cout << "---------------------------------------------" << '\n';
+	std::cout << "|     Index|First name| Last Name| Nick Name|" << '\n';
+	std::cout << "|----------|----------|----------|----------|" << '\n';
+	std::cout << std::right;
+	for (int i = 0; i < book.size; i++)
+	{
+		book.contacts[i].printFormatted();
+	}
+	std::cout << "---------------------------------------------" << '\n';
+	std::cout << std::left;
+	std::cout << "Please enter the index of the contact you want to see: ";
+	if (!getline(std::cin, temp))
+		return ;
+	if (temp.empty())
+	{
+		std::cout << "Input cannot be empty!\n";
+		return ;
+	}
+	integer = atoi(temp.c_str());
+	if (integer < 1 || integer > 8)
+		std::cout << "The index can only be between 1 and 8";
+	else
+		displayContactInfo(book, integer);
+}
+
+void	addToContactArray(PhoneBook &book, Contact &new_contact)
 {
 	Contact	temp;
 	int		i;
@@ -70,7 +118,7 @@ void	add_to_contact_array(PhoneBook &book, Contact &new_contact)
 		book.size++;
 }
 
-void	create_contact(PhoneBook &book)
+void	createContact(PhoneBook &book)
 {
 	bool			filled = false;
 	Contact			tmp;
@@ -81,15 +129,20 @@ void	create_contact(PhoneBook &book)
 	std::string		darkest_secret;
 
 	std::cout << "First name: ";
-	std::getline(std::cin, firstname);
+	if (!std::getline(std::cin, firstname))
+		return ;
 	std::cout << "Last name: ";
-	std::getline(std::cin, lastname);
+	if (!std::getline(std::cin, lastname))
+		return ;
 	std::cout << "Nickname: ";
-	std::getline(std::cin, nickname);
+	if (!std::getline(std::cin, nickname))
+		return ;
 	std::cout << "Phone number: ";
-	std::getline(std::cin, phone_number);
+	if (!std::getline(std::cin, phone_number))
+		return ;
 	std::cout << "Darkest secret: ";
-	std::getline(std::cin, darkest_secret);
+	if (!std::getline(std::cin, darkest_secret))
+		return ;
 
 	if ((firstname.empty() == 0 || !isOnlyWhitespace(firstname)) && (lastname.empty() == 0 || !isOnlyWhitespace(lastname))
 		&& (nickname.empty() == 0 || !isOnlyWhitespace(nickname)) && (phone_number.empty() == 0 || !isOnlyWhitespace(phone_number))
@@ -103,7 +156,7 @@ void	create_contact(PhoneBook &book)
 		tmp.setPhoneNumber(phone_number);
 		tmp.setDarkestSecret(darkest_secret);
 		tmp.index = 1;
-		add_to_contact_array(book, tmp);
+		addToContactArray(book, tmp);
 	}
 }
 
@@ -118,16 +171,13 @@ int	main(void)
 	{
 		command.clear();
 		std::cout << "Write your command here: ";
-		std::getline(std::cin, command);
+		if (!std::getline(std::cin, command))
+			return (1);
 		if (command.compare("EXIT") == 0)
 			exit = true;
 		else if (command.compare("ADD") == 0)
-			create_contact(book);
+			createContact(book);
 		else if (command.compare("SEARCH") == 0)
-			break;
-	}
-	for (int	i = 0; i < book.size; i++)
-	{
-		std::cout << book.contacts[i].index << ' ' <<  book.contacts[i].getFirstName().c_str() << '\n';
+			searchForContact(book);
 	}
 }
