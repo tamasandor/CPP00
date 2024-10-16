@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:42:33 by atamas            #+#    #+#             */
-/*   Updated: 2024/10/15 22:20:48 by atamas           ###   ########.fr       */
+/*   Updated: 2024/10/16 08:36:36 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,11 @@ void	createContact(PhoneBook &book)
 		&& (nickname.empty() == 0 || !isOnlyWhitespace(nickname)) && (phone_number.empty() == 0 || !isOnlyWhitespace(phone_number))
 			 && isOnlyNumbers(phone_number) && (darkest_secret.empty() == 0 || !isOnlyWhitespace(darkest_secret)))
 				filled = true;
+	else
+	{
+		std::cout << "Failed to add new contact!\n";
+		return ;
+	}
 	if (filled == true)
 	{
 		tmp.setFirstName(firstname);
