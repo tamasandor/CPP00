@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:25 by atamas            #+#    #+#             */
-/*   Updated: 2024/10/17 07:39:32 by atamas           ###   ########.fr       */
+/*   Updated: 2024/10/17 15:34:52 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	Account::getNbWithdrawals( void )
 void	Account::displayAccountsInfos( void )
 {
 	_displayTimestamp();
-	std::cout << "accounts:" << _nbAccounts << ";total:" << _totalAmount << ";deposits" << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals << '\n';
+	std::cout << "accounts:" << _nbAccounts << ";total:" << _totalAmount << ";deposits:" << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals << '\n';
 	return ;
 }
 
@@ -96,7 +96,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 }
 int		Account::checkAmount( void ) const
 {
-	return (0);
+	return (_amount);
 }
 void	Account::displayStatus( void ) const
 {
